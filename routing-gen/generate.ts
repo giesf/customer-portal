@@ -41,7 +41,7 @@ async function main() {
     const mod = await import("@app/pages/" + cleanedPath);
     const modKeys = Object.keys(mod);
     const includedMethods = supportedMethods.filter((method) =>
-      modKeys.includes(method)
+      modKeys.includes(method),
     );
     const noAuth = cleanedPathSegments[1] != "portal";
     const importStatement = `import {${includedMethods.map((m) => m + " as " + pagePrefix + m).join(", ")}} from "@app/pages${cleanedPath}"`;
@@ -52,7 +52,7 @@ async function main() {
 app.${method.toLowerCase()}('${cleanedPathSegments.join("/")}',${noAuth ? "authOptional," : "authRequired,"} async (c) => {
     const inps = await makeInputs(c,${method == "POST" ? "true" : "false"})
     return handlePage(c,${pagePrefix + method} ,inps)
-})`
+})`,
               )
               .join("\n")}
         `;
@@ -66,7 +66,7 @@ app.${method.toLowerCase()}('${cleanedPathSegments.join("/")}',${noAuth ? "authO
   write("import { cors } from 'hono/cors'");
   write('import { serveStatic } from "hono/bun"');
   write(
-    "import { authOptional, authRequired } from '@app/infra/auth/middleware'"
+    "import { authOptional, authRequired } from '@app/infra/auth/middleware'",
   );
   write('import { initAuth } from "@app/infra/auth/init"');
   write("import {makeInputs} from '@routing/makeInputs'");

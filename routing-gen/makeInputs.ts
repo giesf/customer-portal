@@ -21,7 +21,7 @@ export type PageInputs = {
 export type NoAuthPageInputs = Omit<PageInputs, "userId">;
 export async function makeInputs(
   c: Context<any, string, BlankInput>,
-  isPost: boolean
+  isPost: boolean,
 ): Promise<PageInputs> {
   const params: Record<string, string> = c.req.param();
 
