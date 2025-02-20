@@ -7,5 +7,16 @@
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "hono": "^4.7.2",
+    "hono-session": "^1.2.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.5.1"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "build-routes": "bun run routing-gen/generate.ts",
+    "dev": "bun run build-routes && bun run src/index.ts"
   }
 }
