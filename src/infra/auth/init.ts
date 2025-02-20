@@ -8,7 +8,14 @@ import { serveStatic } from "hono/bun";
 import { authRequired } from "./middleware";
 
 export const initAuth = (app: Hono) => {
-  app.use(session({ secret: CONFIG.security.auth_secret }));
+  app.use(
+    session({
+      secret: CONFIG.security.auth_secret,
+      cookieOptions: {
+        domain: CONFIG.security.cookie_domain,
+      },
+    }),
+  );
 
   app.use("/downloads/*", authRequired, (c, next) => {
     return serveStatic({
