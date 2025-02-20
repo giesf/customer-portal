@@ -63,7 +63,6 @@ app.${method.toLowerCase()}('${cleanedPathSegments.join("/")}',${noAuth ? "authO
   }
   write("import {Hono} from 'hono'");
   write("import { logger } from 'hono/logger'");
-  write("import { csrf } from 'hono/csrf'");
   write("import { cors } from 'hono/cors'");
   write('import { serveStatic } from "hono/bun"');
   write(
@@ -78,7 +77,6 @@ app.${method.toLowerCase()}('${cleanedPathSegments.join("/")}',${noAuth ? "authO
   });
   write("const app = new Hono()");
   write("app.use(logger())");
-  write("app.use(csrf())");
   write("app.use(cors())");
   write("initAuth(app);");
 
